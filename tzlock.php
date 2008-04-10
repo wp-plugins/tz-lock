@@ -80,8 +80,8 @@ function displayTZLockAdminContent()
 ?>
 <div class="wrap">
   <h2>TZ-Lock Administration</h2>
-  <form name="tzlock_admin" action="<?=bloginfo('url') . '/' . PLUGINDIR . '/tzlock/process_admin.php'?>" method="POST">
-  <input type="hidden" name="CONFIG" value="<?=ABSPATH . 'wp-config.php'?>"/>
+  <form name="tzlock_admin" action="<?php=bloginfo('url') . '/' . PLUGINDIR . '/tzlock/process_admin.php'?>" method="POST">
+  <input type="hidden" name="CONFIG" value="<?php=ABSPATH . 'wp-config.php'?>"/>
   <table cellspacing="2" cellpadding="5" class="editform" align="center">
     <tr><td colspan="2"><h3>Novo geslo</h3></td></tr>
     <tr><td align="right">Oznaka gesla:</td><td><input type="text" name="lockid" value=""/></td></tr>
@@ -102,7 +102,7 @@ function displayTZLockAdminContent()
     {
       $class = $i%2 == 0 ? " class=\"alternate\"" : "";
 ?>    
-      <tr><td width="100%"<?=$class?>><?=$row->lock_id?></td><td<?=$class?>><button type="button" onClick="tzlock_submit('tzlock_admin', 'del_<?=$row->lock_id?>')">Briši</button></td></tr>
+      <tr><td width="100%"<?php=$class?>><?php=$row->lock_id?></td><td<?php=$class?>><button type="button" onClick="tzlock_submit('tzlock_admin', 'del_<?php=$row->lock_id?>')">Briši</button></td></tr>
 <?php
       $i++;
     }
@@ -131,19 +131,19 @@ function getUnlockForm
   ob_start();
 ?>
 
-<form method="post" name="<?=$formName?>" action="<?=bloginfo('url') . '/' . PLUGINDIR . '/tzlock/process.php'?>">
-<input type="hidden" name="CONFIG" value="<?=ABSPATH . 'wp-config.php'?>"/>
+<form method="post" name="<?php=$formName?>" action="<?php=bloginfo('url') . '/' . PLUGINDIR . '/tzlock/process.php'?>">
+<input type="hidden" name="CONFIG" value="<?php=ABSPATH . 'wp-config.php'?>"/>
 <table border="0" class="tzlock_form" style="border: 1px solid #DDD" align="center">  
-  <tr><td colspan="3"><?=$message?></td></tr>
+  <tr><td colspan="3"><?php=$message?></td></tr>
   <tr><td>
-    <label for="pass"><?=$prompt?></label>
+    <label for="pass"><?php=$prompt?></label>
   </td><td>
     <input type="password" name="pass" value=""/>
   </td><td>
-    <a href="javascript:tzlock_submit('<?=$formName?>', 'auth')"><img src="<?=bloginfo('url') . '/' . PLUGINDIR . '/tzlock/unlock.gif'?>" border="0"/></a>
+    <a href="javascript:tzlock_submit('<?php=$formName?>', 'auth')"><img src="<?php=bloginfo('url') . '/' . PLUGINDIR . '/tzlock/unlock.gif'?>" border="0"/></a>
   </td></tr>
 </table>
-<input type="hidden" name="lockid" value="<?=$lockid?>"/>
+<input type="hidden" name="lockid" value="<?php=$lockid?>"/>
 <input type="hidden" name="action"/>
 </form>
 
