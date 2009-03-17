@@ -35,7 +35,7 @@ Version 0.5en - Released 17.03.2009
 */
 
 define("TZLOCK_REGEXP", "/\[lock=(\w+)\](.*?)\[\/lock\]/ims");
-define("TZLOCK_VERSION", "0.2");
+define("TZLOCK_VERSION", "0.5en");
 
 $GLOBALS["tzlock"] = array();
 
