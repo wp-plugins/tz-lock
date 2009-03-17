@@ -24,9 +24,13 @@ Version 0.4 - Released 8.4.2008
 
 - no relative referencing in process***.php files
 
-Version 0.5 - Released 17,11,2009
+Version 0.5 - Released 17.11.2008
 
 - WP database prefix attached to the table name
+
+Version 0.5en - Released 17.03.2009
+
+- English prompts
 
 */
 
@@ -101,9 +105,9 @@ function displayTZLockAdminContent()
   <form name="tzlock_admin" action="<?=bloginfo('url') . '/' . PLUGINDIR . '/tzlock/process_admin.php'?>" method="POST">
   <input type="hidden" name="CONFIG" value="<?=ABSPATH . 'wp-config.php'?>"/>
   <table cellspacing="2" cellpadding="5" class="editform" align="center">
-    <tr><td colspan="2"><h3>Novo geslo</h3></td></tr>
-    <tr><td align="right">Oznaka gesla:</td><td><input type="text" name="lockid" value=""/></td></tr>
-    <tr><td align="right">Geslo:</td><td><input type="password" name="pass" value=""/></td></tr>
+    <tr><td colspan="2"><h3>Creating a new lock</h3></td></tr>
+    <tr><td align="right">Lock name:</td><td><input type="text" name="lockid" value=""/></td></tr>
+    <tr><td align="right">Unlocking key:</td><td><input type="password" name="pass" value=""/></td></tr>
     <tr><td colspan="2" align="right"><button type="button" onClick="tzlock_submit('tzlock_admin', 'add')">Dodaj</button></td></tr>
 <?php
     
@@ -112,7 +116,7 @@ function displayTZLockAdminContent()
   if ($results)
   {
 ?>
-    <tr><td colspan="2"><h3>Obstoječa gesla</h3></td></tr>
+    <tr><td colspan="2"><h3>Available locks</h3></td></tr>
     <tr><td colspan="2"><table border="0" cellspacing="0" cellpadding="4" width="100%">
 <?php
     $i = 0;
@@ -120,7 +124,7 @@ function displayTZLockAdminContent()
     {
       $class = $i%2 == 0 ? " class=\"alternate\"" : "";
 ?>    
-      <tr><td width="100%"<?=$class?>><?=$row->lock_id?></td><td<?=$class?>><button type="button" onClick="tzlock_submit('tzlock_admin', 'del_<?=$row->lock_id?>')">Briši</button></td></tr>
+      <tr><td width="100%"<?=$class?>><?=$row->lock_id?></td><td<?=$class?>><button type="button" onClick="tzlock_submit('tzlock_admin', 'del_<?=$row->lock_id?>')">Remove</button></td></tr>
 <?php
       $i++;
     }
@@ -132,6 +136,11 @@ function displayTZLockAdminContent()
   </table>
   <input type="hidden" name="action"/>
   </form>
+  <br/><br/>
+  <p><hr/></p>
+  <p><h3>Instructions</h3></p>
+  <p>Enclose a part of the content you wish to protect between [lock=lockid]....[/lock] tags.</p>
+  <p>The following content is protected and only my family members have been given unlocking key: [lock=family]Hello, family![/lock]</p>
 </div>
 <?
 }
@@ -140,9 +149,9 @@ function getUnlockForm
 (
   $lockid,
   $seq,
-  $message = "Ta del vsebine je zaklenjen!", 
-  $prompt = "Geslo: ",
-  $action = "Odkleni"
+  $message = "This part of the content is locked. Please, use you key:", 
+  $prompt = "Unlocking key: ",
+  $action = "Unlock"
 )
 {
   $formName = "tzlock_" . $lockid . "_" . $seq;
@@ -179,6 +188,7 @@ function addTZLockHeader()
 
 add_filter("the_content", "tzLockFilter");
 add_filter("comment_text", "tzLockFilter");
+add_filter('the_content_rss', 'tzLockFilter');
 
 register_activation_hook(__FILE__, "activateTZLock");
 register_deactivation_hook(__FILE__, "deactivateTZLock");
