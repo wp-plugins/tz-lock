@@ -149,7 +149,7 @@ function getUnlockForm
 (
   $lockid,
   $seq,
-  $message = "This part of the content is locked. Please, use you key:", 
+  $message = "This part of the content is locked. Please, use your key:", 
   $prompt = "Unlocking key: ",
   $action = "Unlock"
 )
