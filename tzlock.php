@@ -32,6 +32,10 @@ Version 0.5en - Released 17.03.2009
 
 - English prompts
 
+Version 0.6en - Released 11.08.2009
+
+- Some minor translation changes
+
 */
 
 define("TZLOCK_REGEXP", "/\[lock=(\w+)\](.*?)\[\/lock\]/ims");
@@ -108,7 +112,7 @@ function displayTZLockAdminContent()
     <tr><td colspan="2"><h3>Creating a new lock</h3></td></tr>
     <tr><td align="right">Lock name:</td><td><input type="text" name="lockid" value=""/></td></tr>
     <tr><td align="right">Unlocking key:</td><td><input type="password" name="pass" value=""/></td></tr>
-    <tr><td colspan="2" align="right"><button type="button" onClick="tzlock_submit('tzlock_admin', 'add')">Dodaj</button></td></tr>
+    <tr><td colspan="2" align="right"><button type="button" onClick="tzlock_submit('tzlock_admin', 'add')">Create</button></td></tr>
 <?php
     
   $sql = "SELECT * FROM " . $GLOBALS["wpdb"]->prefix . "tzlock_plugin";
@@ -139,8 +143,8 @@ function displayTZLockAdminContent()
   <br/><br/>
   <p><hr/></p>
   <p><h3>Instructions</h3></p>
-  <p>Enclose a part of the content you wish to protect between [lock=lockid]....[/lock] tags.</p>
-  <p>The following content is protected and only my family members have been given unlocking key: [lock=family]Hello, family![/lock]</p>
+  <p>Enclose part of the content you wish to protect between [lock=lockid]....[/lock] tags.</p>
+  <p>An example: The following content is protected and only my family members have been given unlocking key: [lock=family]Hello, family![/lock]</p>
 </div>
 <?
 }
